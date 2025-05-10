@@ -1,0 +1,114 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+.main{
+    margin-top: 40px;
+    text-align: center;
+}
+ul{
+    display: flex;
+    list-style: none;
+    gap: 40px;
+    padding-top: 50px;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+}
+li{
+    font-family: 'Kanit';
+    font-size: 25px;
+    transition: transform 0.1s ease-in-out;
+}
+li a{
+    color: white;
+    text-decoration: none;
+}
+.nav-container li:hover{
+    transform: scale(1.1);
+}
+.nav-container li a:hover{
+    color: white;
+}
+.blog-container,.form-container{
+    display: flex;
+    flex-direction: column;
+    align-items:first baseline;
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+}
+.form-container{
+    width: 500px;
+}
+.main-blog,.main-form{
+    font-size: 40px;
+}
+p{
+    font-family: 'Kanit';
+    font-weight: 400;
+    font-size: 25px;
+}
+form{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+input{
+    width: 500px;
+    font-size: 20px;
+    font-family: 'Kanit';
+    font-weight: 400;
+}
+textarea{
+    width: 500px;
+    font-size: 20px;
+    font-family: 'Kanit';
+    font-weight: 400;
+}
+.text{
+    height: 35px;
+}
+.des{
+    height: 300px;
+}
+button{
+    font-family: 'Kanit';
+    font-weight: 400;
+}
+.blog-list-container ul{
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -30px;
+}
+.blog-list-container li{
+    background-color:#f9f9f9 ;
+    margin-top: 25px;
+    border: 1px solid transparent;
+    border-radius: 15px;
+    padding: 20px 30px 20px 30px;
+    color: black;
+    width: 700px;
+}
+.blog-topic,.blog-des{
+    font-family: 'Kanit';
+    font-weight: 400;
+}
+
+.icon{
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    cursor: pointer;
+}
