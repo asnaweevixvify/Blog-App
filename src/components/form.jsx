@@ -40,7 +40,9 @@ function Form(props){
         e.preventDefault()
         const data = {
             text:text,
-            des:des
+            des:des,
+            name:'vixvify',
+            time:new Date().toLocaleString()
         }
         props.getData(data)
         setText('')

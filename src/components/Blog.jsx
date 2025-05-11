@@ -1,5 +1,7 @@
 import './App.css'
 import { useState } from 'react'
+import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
+
 
 function Blog(props){
     const dataList = props.sendData
@@ -8,26 +10,35 @@ function Blog(props){
             <h1 className='main-blog'>Recent Post</h1>
             <div className="blog-list-container">
                 <ul>
-                    {dataList.map((e)=>{
+                    {dataList.map((e,index)=>{
                         return(
-                            <>
+                            <div className="list-container"key={index}>
                                 <li>
-                                    <h2 className='blog-topic'>{e.text}</h2>
-                                    <h4 className='blog-des'>
+                                    <h2 className='blog-topic'><Link to="/des">{e.text}</Link></h2>
+                                    <h4 className='blog-des' style={{ whiteSpace: 'pre-line' }}>
                                         {e.des}
                                     </h4>
                                     <div className="icon">
-                                        <i className="fa-solid fa-pen fa-xs"></i>
-                                        <i className="fa-solid fa-trash fa-xs" style={{color:'red'}}></i>
+                                        <h3>ผู้เขียน {e.name}</h3>
+                                        <h3>{e.time}</h3>
+                                        <Link to='/edit'><i className="fa-solid fa-pen fa-xs" onClick={()=>editItem(e,index)}></i></Link>
+                                        <i className="fa-solid fa-trash fa-xs" style={{color:'red'}} onClick={()=>delItem(index)}></i>
                                     </div>
                                 </li>
-                            </>
+                                <p className='line'></p>
+                            </div>
                         )
                     })}
                 </ul>
             </div>
         </div>
     )
+    function delItem(index){
+        props.getDelItem(index)
+    }
+    function editItem(e,index){
+        props.getEditData(e,index)
+    }
 }
                 
 export default Blog
