@@ -5,6 +5,7 @@ import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
 
 function Blog(props){
     const dataList = props.sendData
+    const [index,setIndex] = useState('')
     return(
         <div className="blog-container">
             <h1 className='main-blog'>Recent Post</h1>
@@ -14,7 +15,7 @@ function Blog(props){
                         return(
                             <div className="list-container"key={index}>
                                 <li>
-                                    <h2 className='blog-topic'><Link to="/des">{e.text}</Link></h2>
+                                    <h2 className='blog-topic' onClick={()=>sendIndex(index)}><Link to="/des">{e.text}</Link></h2>
                                     <h4 className='blog-des' style={{ whiteSpace: 'pre-line' }}>
                                         {e.des}
                                     </h4>
@@ -38,6 +39,10 @@ function Blog(props){
     }
     function editItem(e,index){
         props.getEditData(e,index)
+    }
+    function sendIndex(i){
+        setIndex(i)
+        props.getIdTopic(i)
     }
 }
                 

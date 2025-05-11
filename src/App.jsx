@@ -5,6 +5,7 @@ import Blog from './components/Blog'
 import Form from './components/form'
 import Editblog from './components/Editblog'
 import Des from './components/Des'
+import Login from './components/Login'
 import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
   ]
 
   const [dataList,setDataList] = useState(prevData)
+  const [dataShow,setDatashow] = useState('')
 
   function getData(data){
       setDataList((oldData) => [...oldData, data])
@@ -50,14 +52,21 @@ function App() {
     })
     setDataList(newData)
   }
+  function getIdTopic(i){
+    const datashow = dataList.filter((_,index)=>{
+      return index === i
+    })
+    setDatashow(datashow)
+  }
 
   return (
     <>
       <Router>
       <Nav/>
         <Routes>
-          <Route path='/' exact element={
-            <Blog sendData={dataList} getDelItem={getDelItem} getEditData={getEditData}/>
+          <Route path='/' element={<Login/>}></Route>
+          <Route path='/blog' element={
+            <Blog sendData={dataList} getDelItem={getDelItem} getEditData={getEditData} getIdTopic={getIdTopic}/>
           }></Route>
           <Route path='/insert' element={
             <Form getData={getData}/>
@@ -66,7 +75,7 @@ function App() {
             <Editblog sendEditItem={editItem} getEditItem={getEditItem}/>
           }>
           </Route>
-          <Route path='/des' element={<Des/>}></Route>
+          <Route path='/des' element={<Des dataShow={dataShow}/>}></Route>
         </Routes>
       </Router>
     </>

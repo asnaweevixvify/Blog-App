@@ -1,10 +1,14 @@
 import './App.css'
 import { useState , useEffect } from 'react'
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom';
+
 
 function Form(props){
     const [text,setText] = useState('')
     const [inputStatus,setInputStatus] = useState(false)
+    const navigate = useNavigate();
+
 
     const [des,setDes] = useState('')
     useEffect(()=>{
@@ -51,6 +55,8 @@ function Form(props){
             title: "เพิ่ม Blog สำเร็จ",
             icon: "success",
             draggable: true
+          }).then(()=>{
+            navigate('/blog');
           })
     }
 }
