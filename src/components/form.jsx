@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 function Form(props){
     const [text,setText] = useState('')
     const [inputStatus,setInputStatus] = useState(false)
+    const [name,setName] = useState('')
     const navigate = useNavigate();
 
 
@@ -28,6 +29,8 @@ function Form(props){
                 <input type='text' className='text' value={text} onInput={textInput}></input>
                 <p>เพิ่มคำบรรยาย</p>
                 <textarea className='des' value={des} onInput={desInput}></textarea>
+                <p>ชื่อผู้เขียน</p>
+                <input type='text' className='text'value={name} onInput={nameInput}></input>
                 <button type='submit' disabled={inputStatus}>เพิ่ม Blog</button>
             </form>
         </div>
@@ -40,17 +43,21 @@ function Form(props){
     function desInput(e){
         setDes(e.target.value)
     }
+    function nameInput(e){
+        setName(e.target.value)
+    }
     function sendInfo(e){
         e.preventDefault()
         const data = {
             text:text,
             des:des,
-            name:'vixvify',
+            name:name,
             time:new Date().toLocaleString()
         }
         props.getData(data)
         setText('')
         setDes('')
+        setName('')
         Swal.fire({
             title: "เพิ่ม Blog สำเร็จ",
             icon: "success",

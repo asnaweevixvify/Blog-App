@@ -106,7 +106,7 @@ button{
     overflow: hidden;
 }
 .blog-list-container h4{
-    max-height: 150px;
+    max-height: 120px;
     overflow: hidden;
 }
 .blog-topic,.blog-des{
@@ -157,13 +157,14 @@ h3{
     margin-right: auto;
 }
 .des-container{
-    margin-top: 60px;
+    margin-top: 80px;
     background-color: white;
     width: 700px;
     color: black;
     border: 1px solid transparent;
     border-radius: 15px;
     padding: 20px 30px 20px 30px;
+    margin-bottom: 60px;
 }
 .des-container h2,h4{
     font-family: 'Kanit';
@@ -178,12 +179,13 @@ h3{
     margin-top: 80px;
 }
 form{
-    margin-top: 60px;
+    margin-top: 20px;
 }
 .login-main{
     font-family: 'Kanit';
     font-weight: 500;
     text-align: center;
+    margin-top: 180px;
 }
 .login-container input{
     height: 40px;
@@ -206,6 +208,6 @@ form{
     font-size: 40px;
 }
 .des-des{
-    font-size: 25px;
+    font-size: 20px;
     margin-top: 30px;
 }

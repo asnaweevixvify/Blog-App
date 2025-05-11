@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-function Login(){
+function Login(props){
     const [name,setName] = useState('')
     const [password,setPassword] = useState('')
     const navigate = useNavigate();
@@ -33,6 +33,7 @@ function Login(){
         e.preventDefault()
         try{
             await signInWithEmailAndPassword(auth,name,password)
+            props.status(true)
             Swal.fire({
                 title: "เข้าสู่ระบบสำเร็จ",
                 icon: "success",

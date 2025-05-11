@@ -26,6 +26,7 @@ function App() {
 
   const [dataList,setDataList] = useState(prevData)
   const [dataShow,setDatashow] = useState('')
+  const [status,setStatus] = useState(false)
 
   function getData(data){
       setDataList((oldData) => [...oldData, data])
@@ -59,12 +60,16 @@ function App() {
     setDatashow(datashow)
   }
 
+  function getStatus(e){
+    setStatus(e)
+  }
+
   return (
     <>
       <Router>
-      <Nav/>
+      {status && <Nav/>}
         <Routes>
-          <Route path='/' element={<Login/>}></Route>
+          <Route path='/' element={<Login status={getStatus}/>}></Route>
           <Route path='/blog' element={
             <Blog sendData={dataList} getDelItem={getDelItem} getEditData={getEditData} getIdTopic={getIdTopic}/>
           }></Route>
