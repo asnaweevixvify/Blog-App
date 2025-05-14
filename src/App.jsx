@@ -1,4 +1,4 @@
-import { useState , useEffect} from 'react'
+import { useState } from 'react'
 import './components/App.css'
 import Nav from './components/Nav'
 import Blog from './components/Blog'
@@ -7,7 +7,6 @@ import Editblog from './components/Editblog'
 import Des from './components/Des'
 import Login from './components/Login'
 import Register from './components/register'
-import { onAuthStateChanged } from 'firebase/auth'
 import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
 
 function App() {
@@ -62,21 +61,22 @@ function App() {
     setDatashow(datashow)
   }
 
-  
-
+  function getStatus(e){
+    setStatus(e)
+  }
 
   return (
     <>
       <Router>
       {status && <Nav/>}
         <Routes>
-          <Route path='/' element={<Login/>}></Route>
-          <Route path='/blog' element={
-            <Blog sendData={dataList} getDelItem={getDelItem} getEditData={getEditData} getIdTopic={getIdTopic}/>
-          }></Route>
-          <Route path='/insert' element={
+          <Route path='/' element={<Login status={getStatus}/>}></Route>
+          {status && <Route path='/blog' element={
+             <Blog sendData={dataList} getDelItem={getDelItem} getEditData={getEditData} getIdTopic={getIdTopic}/>
+          }></Route>}
+          {status && <Route path='/insert' element={
             <Form getData={getData}/>
-          }></Route>
+          }></Route>}
           <Route path='/edit' element={
             <Editblog sendEditItem={editItem} getEditItem={getEditItem}/>
           }>
