@@ -7,11 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
 
 
-
-function Login(props){
-    useEffect(()=>{
-        props.getStatus(false)
-    },[])
+function Login(){
+    
     const [name,setName] = useState('')
     const [password,setPassword] = useState('')
     const navigate = useNavigate();
@@ -39,12 +36,11 @@ function Login(props){
         try{
             await signInWithEmailAndPassword(auth,name,password)
             Swal.fire({
-                title: "เข้าสู่ระบบสำเร็จ",
+                title: `<h2>เข้าสู่ระบบสำเร็จ</h2>`,
                 icon: "success",
                 draggable: true
               }).then(()=>{
                 navigate('/blog');
-                props.getStatus(true)
               })
             
         }   

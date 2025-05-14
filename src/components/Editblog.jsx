@@ -42,7 +42,7 @@ function Editblog(props){
         setGetText('')
         setGetDes('')
         Swal.fire({
-            title: "แก้ไข Blog สำเร็จ",
+            title: `<h2>แก้ไข Blog สำเร็จ</h2>`,
             icon: "success",
             draggable: true
           }).then(()=>{

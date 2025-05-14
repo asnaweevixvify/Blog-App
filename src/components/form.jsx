@@ -59,7 +59,7 @@ function Form(props){
         setDes('')
         setName('')
         Swal.fire({
-            title: "เพิ่ม Blog สำเร็จ",
+            title: `<h2>เพิ่ม Blog สำเร็จ</h2>`,
             icon: "success",
             draggable: true
           }).then(()=>{

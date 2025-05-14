@@ -10,9 +10,26 @@ import Register from './components/register'
 import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
 import { db } from './components/firebase'
 import { getFirestore, collection, getDocs , addDoc ,updateDoc, deleteDoc ,doc} from 'firebase/firestore/lite';
-import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './components/firebase'
+import { onAuthStateChanged } from 'firebase/auth'
+import { useNavigate } from 'react-router-dom';
+
+
 function App() {
+  const navigate = useNavigate();
+  const [status, setStatus] = useState(false);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setStatus(true);
+        navigate('/blog'); 
+      } else {
+        setStatus(false);
+      }
+    });
+  },[]);
+
   const [dataList,setDataList] = useState([])
   useEffect(()=>{
     async function getList(db){
@@ -26,7 +43,6 @@ function App() {
   getList(db)
   },[])
   const [dataShow,setDatashow] = useState('')
-  const [status,setStatus] = useState(false)
 
   function getData(data){
     addDoc(collection(db,'bloglist'),{
@@ -66,27 +82,15 @@ function App() {
     })
     setDatashow(datashow)
   }
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setLoginPage(true)
-    } else {
-      setLoginPage(false)
-    }
-  });
-  const [loginPage,setLoginPage] = useState(false)
-  function getStatus(e){
-    setLoginPage(e)
-  }
-
+  
   return (
     <>
-      <Router>
-      {loginPage && <Nav/>}
+      {status && <Nav/>}
         <Routes>
-          <Route path='/' element={<Login getStatus={getStatus}/>}></Route>
-          {loginPage && <Route path='/blog' element={
+          <Route path='/' element={<Login/>}></Route>
+          <Route path='/blog' element={
              <Blog sendData={dataList} getDelItem={getDelItem} getEditData={getEditData} getIdTopic={getIdTopic}/>
-          }></Route>}
+          }></Route>
           <Route path='/insert' element={
             <Form getData={getData}/>
           }></Route>
@@ -97,7 +101,6 @@ function App() {
           <Route path='/des' element={<Des dataShow={dataShow}/>}></Route>
           <Route path='/regis' element={<Register/>}></Route>
         </Routes>
-      </Router>
     </>
   )
 }
