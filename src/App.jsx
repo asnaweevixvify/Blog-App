@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState , useEffect} from 'react'
 import './components/App.css'
 import Nav from './components/Nav'
 import Blog from './components/Blog'
@@ -6,6 +6,8 @@ import Form from './components/form'
 import Editblog from './components/Editblog'
 import Des from './components/Des'
 import Login from './components/Login'
+import Register from './components/register'
+import { onAuthStateChanged } from 'firebase/auth'
 import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
 
 function App() {
@@ -60,16 +62,15 @@ function App() {
     setDatashow(datashow)
   }
 
-  function getStatus(e){
-    setStatus(e)
-  }
+  
+
 
   return (
     <>
       <Router>
       {status && <Nav/>}
         <Routes>
-          <Route path='/' element={<Login status={getStatus}/>}></Route>
+          <Route path='/' element={<Login/>}></Route>
           <Route path='/blog' element={
             <Blog sendData={dataList} getDelItem={getDelItem} getEditData={getEditData} getIdTopic={getIdTopic}/>
           }></Route>
@@ -81,6 +82,7 @@ function App() {
           }>
           </Route>
           <Route path='/des' element={<Des dataShow={dataShow}/>}></Route>
+          <Route path='/regis' element={<Register/>}></Route>
         </Routes>
       </Router>
     </>

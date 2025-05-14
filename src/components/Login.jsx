@@ -4,10 +4,11 @@ import { useState } from 'react'
 import { auth } from './firebase'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
 
 
 
-function Login(props){
+function Login(){
     const [name,setName] = useState('')
     const [password,setPassword] = useState('')
     const navigate = useNavigate();
@@ -20,6 +21,7 @@ function Login(props){
                 <span>Password</span>
                 <input type='password' className='login-pass' onInput={passInput}></input>
                 <button type='submit' className='login-btn'>เข้าสู่ระบบ</button>
+                <h4><Link to='/regis'>ยังไม่มีบัญชี</Link></h4>
             </form>
         </div>
     )
@@ -33,7 +35,6 @@ function Login(props){
         e.preventDefault()
         try{
             await signInWithEmailAndPassword(auth,name,password)
-            props.status(true)
             Swal.fire({
                 title: "เข้าสู่ระบบสำเร็จ",
                 icon: "success",
