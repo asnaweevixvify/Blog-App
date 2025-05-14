@@ -1,12 +1,16 @@
 import './App.css'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom';
+
 
 
 function Editblog(props){
     const data = props.sendEditItem
     const [getText,setGetText] = useState(data.text)
     const [getDes,setGetDes] = useState(data.des)
+    const navigate = useNavigate();
+
     return(
         <div className="form-container">
             <h1 className='main-form'>Edit Blog</h1>
@@ -41,6 +45,9 @@ function Editblog(props){
             title: "แก้ไข Blog สำเร็จ",
             icon: "success",
             draggable: true
+          }).then(()=>{
+            navigate('/blog');
+            window.location.reload()
           })
     }
 }

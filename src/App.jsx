@@ -53,18 +53,17 @@ function App() {
   const [editItem,setEditItem] = useState('')
   const [editIndex,sendEditIndex] = useState('')
 
-  function getEditData(e,index){
+  function getEditData(e,id){
       setEditItem(e)
-      sendEditIndex(index)
+      sendEditIndex(id)
   }
   function getEditItem(newEditData){
-    const newData = dataList.map((oldData,i)=>{
-      if(i === editIndex){
-        return newEditData
-      }
-      return oldData
+    const docref = doc(db,'bloglist',editIndex)
+    updateDoc(docref,{
+      text:newEditData.text,
+      des:newEditData.des,
+      name:newEditData.name
     })
-    setDataList(newData)
   }
   function getIdTopic(i){
     const datashow = dataList.filter((_,index)=>{

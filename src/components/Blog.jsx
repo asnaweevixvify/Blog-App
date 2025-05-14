@@ -22,7 +22,7 @@ function Blog(props){
                                     <div className="icon">
                                         <h3>ผู้เขียน {e.name}</h3>
                                         <h3>{e.time}</h3>
-                                        <Link to='/edit'><i className="fa-solid fa-pen fa-xs" onClick={()=>editItem(e,index)}></i></Link>
+                                        <Link to='/edit'><i className="fa-solid fa-pen fa-xs" onClick={()=>editItem(e,e.id)}></i></Link>
                                         <i className="fa-solid fa-trash fa-xs" style={{color:'red'}} onClick={()=>delItem(e.id)}></i>
                                     </div>
                                 </li>
