@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import './components/App.css'
 import Nav from './components/Nav'
 import Blog from './components/Blog'
@@ -8,29 +8,32 @@ import Des from './components/Des'
 import Login from './components/Login'
 import Register from './components/register'
 import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
+import { db } from './components/firebase'
+import { getFirestore, collection, getDocs , addDoc , deleteDoc ,doc} from 'firebase/firestore/lite';
 
 function App() {
-  const prevData=[
-    {
-      text:'React คืออะไร?',
-      des:'React เป็นไลบรารี JavaScript ที่พัฒนาโดย Facebook เพื่อช่วยสร้าง User Interface (UI) ที่มีประสิทธิภาพ โดย React มุ่งเน้นการสร้าง Component ซึ่งเป็นส่วนประกอบของ UI ที่สามารถใช้ซ้ำได้ และแต่ละ Component สามารถเก็บสถานะ (state) และเมทอด (methods) ต่างๆ เพื่อการจัดการกับข้อมูลและการแสดงผล'
-      ,name:'vixvify'
-      ,time:'4/11/2025, 10.30.05 AM'
-    },
-    {
-      text:'React ควรใช้กับงานประเภทไหน?',
-      des:'React เหมาะสำหรับการพัฒนาแอปพลิเคชันเว็บที่มีขอบเขตใหญ่หรือซับซ้อน โดยเฉพาะอย่างยิ่งเมื่อต้องการในการจัดการข้อมูลแบบ Real-time หรือการสร้าง UI ที่ตอบสนองต่อเหตุการณ์ต่าง ๆ อย่างรวดเร็ว เช่น เว็บแอปพลิเคชันสำหรับการซื้อขาย, เกม, แพลตฟอร์มการค้าออนไลน์ เป็นต้น'
-      ,name:'vixvify',
-      time:'5/11/2025, 8.42.28 AM'
-    }
-  ]
-
-  const [dataList,setDataList] = useState(prevData)
+  const [dataList,setDataList] = useState([])
+  useEffect(()=>{
+    async function getList(db){
+      const empCol = collection(db,'bloglist')
+      const empSnapshot = await getDocs(empCol)
+      const newItem = empSnapshot.docs.map(e=>({
+        ...e.data(),id:e.id
+      }))
+      setDataList(newItem)
+  }
+  getList(db)
+  },[])
   const [dataShow,setDatashow] = useState('')
   const [status,setStatus] = useState(false)
 
   function getData(data){
-      setDataList((oldData) => [...oldData, data])
+    addDoc(collection(db,'bloglist'),{
+      text:data.text,
+      des:data.des,
+      name:data.name
+    })
+    setDataList((oldData) => [...oldData, data])
   }
   function getDelItem(index){
     const newData = dataList.filter((_,i)=>{
