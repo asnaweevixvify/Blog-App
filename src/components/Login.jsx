@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import './App.css'
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import { auth } from './firebase'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,9 @@ import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
 
 
 function Login(props){
+    useEffect(()=>{
+        props.getStatus(false)
+    },[])
     const [name,setName] = useState('')
     const [password,setPassword] = useState('')
     const navigate = useNavigate();
@@ -35,13 +38,13 @@ function Login(props){
         e.preventDefault()
         try{
             await signInWithEmailAndPassword(auth,name,password)
-            props.status(true)
             Swal.fire({
                 title: "เข้าสู่ระบบสำเร็จ",
                 icon: "success",
                 draggable: true
               }).then(()=>{
                 navigate('/blog');
+                props.getStatus(true)
               })
             
         }   

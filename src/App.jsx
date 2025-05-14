@@ -10,7 +10,8 @@ import Register from './components/register'
 import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
 import { db } from './components/firebase'
 import { getFirestore, collection, getDocs , addDoc ,updateDoc, deleteDoc ,doc} from 'firebase/firestore/lite';
-
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from './components/firebase'
 function App() {
   const [dataList,setDataList] = useState([])
   useEffect(()=>{
@@ -31,9 +32,9 @@ function App() {
     addDoc(collection(db,'bloglist'),{
       text:data.text,
       des:data.des,
-      name:data.name
+      name:data.name,
+      time:data.time
     })
-    setDataList((oldData) => [...oldData, data])
   }
   async function getDelItem(id){
     if (!id) {
@@ -65,20 +66,27 @@ function App() {
     })
     setDatashow(datashow)
   }
-
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setLoginPage(true)
+    } else {
+      setLoginPage(false)
+    }
+  });
+  const [loginPage,setLoginPage] = useState(false)
   function getStatus(e){
-    setStatus(e)
+    setLoginPage(e)
   }
 
   return (
     <>
       <Router>
-      <Nav/>
+      {loginPage && <Nav/>}
         <Routes>
-          <Route path='/' element={<Login status={getStatus}/>}></Route>
-          <Route path='/blog' element={
+          <Route path='/' element={<Login getStatus={getStatus}/>}></Route>
+          {loginPage && <Route path='/blog' element={
              <Blog sendData={dataList} getDelItem={getDelItem} getEditData={getEditData} getIdTopic={getIdTopic}/>
-          }></Route>
+          }></Route>}
           <Route path='/insert' element={
             <Form getData={getData}/>
           }></Route>
