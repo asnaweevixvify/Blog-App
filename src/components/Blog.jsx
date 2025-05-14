@@ -23,7 +23,7 @@ function Blog(props){
                                         <h3>ผู้เขียน {e.name}</h3>
                                         <h3>{e.time}</h3>
                                         <Link to='/edit'><i className="fa-solid fa-pen fa-xs" onClick={()=>editItem(e,index)}></i></Link>
-                                        <i className="fa-solid fa-trash fa-xs" style={{color:'red'}} onClick={()=>delItem(index)}></i>
+                                        <i className="fa-solid fa-trash fa-xs" style={{color:'red'}} onClick={()=>delItem(e.id)}></i>
                                     </div>
                                 </li>
                                 <p className='line'></p>
@@ -34,8 +34,8 @@ function Blog(props){
             </div>
         </div>
     )
-    function delItem(index){
-        props.getDelItem(index)
+    function delItem(id){
+        props.getDelItem(id)
     }
     function editItem(e,index){
         props.getEditData(e,index)

@@ -9,7 +9,7 @@ import Login from './components/Login'
 import Register from './components/register'
 import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
 import { db } from './components/firebase'
-import { getFirestore, collection, getDocs , addDoc , deleteDoc ,doc} from 'firebase/firestore/lite';
+import { getFirestore, collection, getDocs , addDoc ,updateDoc, deleteDoc ,doc} from 'firebase/firestore/lite';
 
 function App() {
   const [dataList,setDataList] = useState([])
@@ -35,11 +35,20 @@ function App() {
     })
     setDataList((oldData) => [...oldData, data])
   }
-  function getDelItem(index){
-    const newData = dataList.filter((_,i)=>{
-      return  index !== i
-    })
-    setDataList(newData)
+  async function getDelItem(id){
+    if (!id) {
+      console.error("ไม่มี id ส่งเข้ามาเพื่อลบ")
+      return
+    }
+    else{
+    await deleteDoc(doc(db,'bloglist',id))
+    const empCol = collection(db,'bloglist')
+    const empSnapshot = await getDocs(empCol)
+    const newItem = empSnapshot.docs.map(e => ({
+      ...e.data(), id: e.id
+    }))
+    setDataList(newItem)
+    }
   }
   const [editItem,setEditItem] = useState('')
   const [editIndex,sendEditIndex] = useState('')
@@ -71,15 +80,15 @@ function App() {
   return (
     <>
       <Router>
-      {status && <Nav/>}
+      <Nav/>
         <Routes>
           <Route path='/' element={<Login status={getStatus}/>}></Route>
-          {status && <Route path='/blog' element={
+          <Route path='/blog' element={
              <Blog sendData={dataList} getDelItem={getDelItem} getEditData={getEditData} getIdTopic={getIdTopic}/>
-          }></Route>}
-          {status && <Route path='/insert' element={
+          }></Route>
+          <Route path='/insert' element={
             <Form getData={getData}/>
-          }></Route>}
+          }></Route>
           <Route path='/edit' element={
             <Editblog sendEditItem={editItem} getEditItem={getEditItem}/>
           }>

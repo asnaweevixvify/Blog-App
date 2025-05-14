@@ -64,6 +64,7 @@ function Form(props){
             draggable: true
           }).then(()=>{
             navigate('/blog');
+            window.location.reload()
           })
     }
 }
