@@ -42,14 +42,8 @@ function App() {
     }
     else{
     await deleteDoc(doc(db,'bloglist',id))
-    const empCol = collection(db,'bloglist')
-    const empSnapshot = await getDocs(empCol)
-    const newItem = empSnapshot.docs.map(e => ({
-      ...e.data(), id: e.id
-    }))
-    setDataList(newItem)
-    }
   }
+}
   const [editItem,setEditItem] = useState('')
   const [editIndex,sendEditIndex] = useState('')
 

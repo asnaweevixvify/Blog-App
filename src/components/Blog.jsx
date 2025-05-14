@@ -1,6 +1,7 @@
 import './App.css'
 import { useState } from 'react'
 import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 
 function Blog(props){
@@ -36,6 +37,13 @@ function Blog(props){
     )
     function delItem(id){
         props.getDelItem(id)
+        Swal.fire({
+            title: "ลบรายการสำเร็จ",
+            icon: "success",
+            draggable: true
+          }).then(()=>{
+            window.location.reload()
+          })
     }
     function editItem(e,index){
         props.getEditData(e,index)
