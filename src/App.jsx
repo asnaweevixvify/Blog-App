@@ -37,7 +37,7 @@ function App() {
 
   useEffect(() => {
     if (justLoggedIn) {
-      navigate('/blog');
+      navigate('/');
     }
   }, [justLoggedIn]);
 
@@ -99,7 +99,7 @@ function App() {
       <Nav status={status}/>
         <Routes>
           <Route path='/login' element={<Login sendJustLoggedIn={sendJustLoggedIn} />}></Route>
-          <Route path='/blog' exact element={
+          <Route path='/'element={
              <Blog status={status} sendData={dataList} getDelItem={getDelItem} getEditData={getEditData} getIdTopic={getIdTopic}/>
           }></Route>
           <Route path='/insert' element={

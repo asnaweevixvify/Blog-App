@@ -1,19 +1,32 @@
 import './App.css'
 import { useState } from 'react'
 import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
-
+import { signOut } from 'firebase/auth'
+import { auth } from './firebase'
+import Swal from 'sweetalert2'
 
 function Nav(props){
     const status = props.status
     return(
         <div className="nav-container">
             <ul>
-                <li><Link to="/blog">Home</Link></li>
+                <li><Link to="/">Home</Link></li>
                 {status &&<li><Link to="/insert">Add Blog</Link></li>}
                 {!status && <li><Link to="/login">Log in</Link></li>}
+                {status &&<li onClick={signoutBtn}>Logout</li>}
             </ul>
         </div>
     )
+    function signoutBtn(){
+        Swal.fire({
+            title: `<h2>ออกจากระบบสำเร็จ</h2>`,
+            icon: "success",
+            draggable: true
+          }).then(()=>{
+            window.location.reload()
+            return signOut(auth);
+          })
+    }
 }
 
 export default Nav

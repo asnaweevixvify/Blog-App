@@ -231,3 +231,6 @@ form h4{
 form h4 a{
     color: white;
 }
+.nav-container ul li{
+    cursor: pointer;
+}

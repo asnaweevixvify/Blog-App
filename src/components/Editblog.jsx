@@ -46,7 +46,7 @@ function Editblog(props){
             icon: "success",
             draggable: true
           }).then(()=>{
-            navigate('/blog');
+            navigate('/');
             window.location.reload()
           })
     }
