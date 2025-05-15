@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword , signOut } from 'firebase/auth'
 import './App.css'
 import { useState } from 'react'
 import { auth } from './firebase'
@@ -37,7 +37,8 @@ function Register(){
                 icon: "success",
                 draggable: true
               }).then(()=>{
-                navigate('/');
+                navigate('/login');
+                return signOut(auth);
               })
             
         }   

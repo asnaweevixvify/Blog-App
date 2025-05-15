@@ -18,17 +18,28 @@ import { useNavigate } from 'react-router-dom';
 function App() {
   const navigate = useNavigate();
   const [status, setStatus] = useState(false);
+  const [justLoggedIn, setJustLoggedIn] = useState(false)
+
+  function sendJustLoggedIn(d){
+    setJustLoggedIn(d)
+  }
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe =  onAuthStateChanged(auth, (user) => {
       if (user) {
         setStatus(true);
-        navigate('/blog'); 
       } else {
         setStatus(false);
       }
     });
+    return () => unsubscribe();
   },[]);
+
+  useEffect(() => {
+    if (justLoggedIn) {
+      navigate('/blog');
+    }
+  }, [justLoggedIn]);
 
   const [dataList,setDataList] = useState([])
   useEffect(()=>{
@@ -85,11 +96,11 @@ function App() {
   
   return (
     <>
-      {status && <Nav/>}
+      <Nav status={status}/>
         <Routes>
-          <Route path='/' element={<Login/>}></Route>
-          <Route path='/blog' element={
-             <Blog sendData={dataList} getDelItem={getDelItem} getEditData={getEditData} getIdTopic={getIdTopic}/>
+          <Route path='/login' element={<Login sendJustLoggedIn={sendJustLoggedIn} />}></Route>
+          <Route path='/blog' exact element={
+             <Blog status={status} sendData={dataList} getDelItem={getDelItem} getEditData={getEditData} getIdTopic={getIdTopic}/>
           }></Route>
           <Route path='/insert' element={
             <Form getData={getData}/>

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
 
 
-function Login(){
+function Login(props){
     
     const [name,setName] = useState('')
     const [password,setPassword] = useState('')
@@ -40,7 +40,8 @@ function Login(){
                 icon: "success",
                 draggable: true
               }).then(()=>{
-                navigate('/blog');
+                props.sendJustLoggedIn(true)
+                props.getUsername(name)
               })
             
         }   
