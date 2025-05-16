@@ -2,6 +2,7 @@ import './App.css'
 import { useState , useEffect } from 'react'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
+import { auth } from './firebase'
 
 
 function Form(props){
@@ -47,12 +48,14 @@ function Form(props){
         setName(e.target.value)
     }
     function sendInfo(e){
+        const user = auth.currentUser
         e.preventDefault()
         const data = {
             text:text,
             des:des,
             name:name,
-            time:new Date().toLocaleString()
+            time:new Date().toLocaleString(),
+            uid:user.uid
         }
         props.getData(data)
         setText('')

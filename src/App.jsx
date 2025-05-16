@@ -13,21 +13,19 @@ import { getFirestore, collection, getDocs , addDoc ,updateDoc, deleteDoc ,doc} 
 import { auth } from './components/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 
 
 function App() {
   const navigate = useNavigate();
   const [status, setStatus] = useState(false);
-  const [justLoggedIn, setJustLoggedIn] = useState(false)
-
-  function sendJustLoggedIn(d){
-    setJustLoggedIn(d)
-  }
 
   useEffect(() => {
     const unsubscribe =  onAuthStateChanged(auth, (user) => {
       if (user) {
         setStatus(true);
+        navigate('/');
       } else {
         setStatus(false);
       }
@@ -35,11 +33,12 @@ function App() {
     return () => unsubscribe();
   },[]);
 
-  useEffect(() => {
-    if (justLoggedIn) {
-      navigate('/');
-    }
-  }, [justLoggedIn]);
+  const location = useLocation();
+  useEffect(()=>{
+      if(status === true && location.pathname === '/login'){
+        navigate('/');
+      }
+  },[location])
 
   const [dataList,setDataList] = useState([])
   useEffect(()=>{
@@ -60,7 +59,8 @@ function App() {
       text:data.text,
       des:data.des,
       name:data.name,
-      time:data.time
+      time:data.time,
+      uid:data.uid
     })
   }
   async function getDelItem(id){
@@ -98,7 +98,7 @@ function App() {
     <>
       <Nav status={status}/>
         <Routes>
-          <Route path='/login' element={<Login sendJustLoggedIn={sendJustLoggedIn} />}></Route>
+          <Route path='/login' element={<Login />}></Route>
           <Route path='/'element={
              <Blog status={status} sendData={dataList} getDelItem={getDelItem} getEditData={getEditData} getIdTopic={getIdTopic}/>
           }></Route>

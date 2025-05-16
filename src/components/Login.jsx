@@ -40,7 +40,6 @@ function Login(props){
                 icon: "success",
                 draggable: true
               }).then(()=>{
-                props.sendJustLoggedIn(true)
                 props.getUsername(name)
               })
             

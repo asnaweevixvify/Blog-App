@@ -1,11 +1,24 @@
 import './App.css'
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
 import { signOut } from 'firebase/auth'
 import { auth } from './firebase'
 import Swal from 'sweetalert2'
+import { onAuthStateChanged } from 'firebase/auth'
 
 function Nav(props){
+    const [emailName,setEmailName] = useState('')
+    useEffect(() => {
+        const unsubscribe =  onAuthStateChanged(auth, (user) => {
+          if (user) {
+            setEmailName(user.email.split('@')[0])
+          } else {
+            setEmailName('')
+          }
+        });
+        return () => unsubscribe();
+      },[]);
+
     const status = props.status
     return(
         <div className="nav-container">
@@ -13,6 +26,7 @@ function Nav(props){
                 <li><Link to="/">Home</Link></li>
                 {status &&<li><Link to="/insert">Add Blog</Link></li>}
                 {!status && <li><Link to="/login">Log in</Link></li>}
+                {status &&<li>{emailName}</li>}
                 {status &&<li onClick={signoutBtn}>Logout</li>}
             </ul>
         </div>

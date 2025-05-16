@@ -2,11 +2,13 @@ import './App.css'
 import { useState } from 'react'
 import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { auth } from './firebase'
 
 
 function Blog(props){
     const dataList = props.sendData
     const status = props.status
+    const user = auth.currentUser
     const [index,setIndex] = useState('')
     return(
         <div className="blog-container">
@@ -22,10 +24,11 @@ function Blog(props){
                                         {e.des}
                                     </h4>
                                     <div className="icon">
+                                        <h3 onClick={()=>sendIndex(index)}><Link to="/des">อ่านเพิ่มเติม</Link></h3>
                                         <h3>ผู้เขียน {e.name}</h3>
                                         <h3>{e.time}</h3>
-                                        {status && <Link to='/edit'><i className="fa-solid fa-pen fa-xs" onClick={()=>editItem(e,e.id)}></i></Link>}
-                                        {status && <i className="fa-solid fa-trash fa-xs" style={{color:'red'}} onClick={()=>delItem(e.id)}></i>}
+                                        {user && user.uid === e.uid && <Link to='/edit'><i className="fa-solid fa-pen fa-xs" onClick={()=>editItem(e,e.id)}></i></Link>}
+                                        {user && user.uid === e.uid && <i className="fa-solid fa-trash fa-xs" style={{color:'red'}} onClick={()=>delItem(e.id)}></i>}
                                     </div>
                                 </li>
                                 <p className='line'></p>
