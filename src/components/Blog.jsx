@@ -42,12 +42,23 @@ function Blog(props){
     function delItem(id){
         props.getDelItem(id)
         Swal.fire({
-            title: `<h2>ลบรายการสำเร็จ</h2>`,
-            icon: "success",
-            draggable: true
-          }).then(()=>{
-            window.location.reload()
-          })
+            title: `<h2>ยืนยันการลบรายการหรือไม่</h2>`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: `<h2>ลบรายการสำเร็จ</h2>`,
+                    icon: "success",
+                    draggable: true
+                  }).then(()=>{
+                    window.location.reload()
+                  })
+            }
+          });
     }
     function editItem(e,index){
         props.getEditData(e,index)
