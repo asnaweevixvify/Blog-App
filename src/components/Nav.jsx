@@ -26,7 +26,7 @@ function Nav(props){
                 <li><Link to="/">Home</Link></li>
                 {status &&<li><Link to="/insert">Add Blog</Link></li>}
                 {!status && <li><Link to="/login">Log in</Link></li>}
-                {status &&<li>{emailName}</li>}
+                {status &&<li><Link to="/profile">{emailName}</Link></li>}
                 {status &&<li onClick={signoutBtn}>Logout</li>}
             </ul>
         </div>

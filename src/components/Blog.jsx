@@ -7,7 +7,6 @@ import { auth } from './firebase'
 
 function Blog(props){
     const dataList = props.sendData
-    const status = props.status
     const user = auth.currentUser
     const [index,setIndex] = useState('')
     return(

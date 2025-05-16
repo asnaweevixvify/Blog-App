@@ -14,6 +14,7 @@ import { auth } from './components/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import Profile from './components/Profile'
 
 
 
@@ -100,7 +101,7 @@ function App() {
         <Routes>
           <Route path='/login' element={<Login />}></Route>
           <Route path='/'element={
-             <Blog status={status} sendData={dataList} getDelItem={getDelItem} getEditData={getEditData} getIdTopic={getIdTopic}/>
+             <Blog sendData={dataList} getDelItem={getDelItem} getEditData={getEditData} getIdTopic={getIdTopic}/>
           }></Route>
           <Route path='/insert' element={
             <Form getData={getData}/>
@@ -111,6 +112,7 @@ function App() {
           </Route>
           <Route path='/des' element={<Des dataShow={dataShow}/>}></Route>
           <Route path='/regis' element={<Register/>}></Route>
+          <Route path='/profile' element={<Profile sendData={dataList} getDelItem={getDelItem} getEditData={getEditData}/>}></Route>
         </Routes>
     </>
   )
