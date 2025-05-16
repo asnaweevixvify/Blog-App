@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
 
 
-function Login(props){
+function Login(){
     
     const [name,setName] = useState('')
     const [password,setPassword] = useState('')
@@ -39,10 +39,7 @@ function Login(props){
                 title: `<h2>เข้าสู่ระบบสำเร็จ</h2>`,
                 icon: "success",
                 draggable: true
-              }).then(()=>{
-                props.getUsername(name)
               })
-            
         }   
         catch(err){
             alert('เข้าสู่ระบบไม่สำเร็จ')

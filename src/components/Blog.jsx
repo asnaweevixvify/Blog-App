@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import { auth } from './firebase'
-
+import modeData from './ModeData' 
 
 function Blog(props){
     const dataList = props.sendData
@@ -11,8 +11,9 @@ function Blog(props){
     const [index,setIndex] = useState('')
     return(
         <div className="blog-container">
-            <h1 className='main-blog'>Recent Post</h1>
+            <div className="row">
             <div className="blog-list-container">
+            <h1 className='main-blog'>Recent Post</h1>
                 <ul>
                     {dataList.map((e,index)=>{
                         return(
@@ -36,6 +37,20 @@ function Blog(props){
                         )
                     })}
                 </ul>
+            </div>
+            <div className="seacrh-container">
+                    <div className="search-box">
+                        <input type='text'></input>
+                        <i className="fa-solid fa-magnifying-glass fa-xl"></i>
+                    </div>
+                    <div className="mode-container">
+                    {modeData.map((e,index)=>{
+                        return(
+                                <Link key={index}><p>{e}</p></Link>
+                        )
+                    })}
+                    </div>
+            </div>
             </div>
         </div>
     )

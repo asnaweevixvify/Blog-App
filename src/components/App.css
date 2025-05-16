@@ -26,8 +26,13 @@ ul{
     align-items: center;
     margin-left: auto;
     margin-right: auto;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
 }
+.nav-container ul{
+    justify-content: flex-end;
+    width: 1015px;
+}
+
 li{
     font-family: 'Kanit';
     font-size: 25px;
@@ -51,12 +56,23 @@ li a{
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.blog-list-container{
+    display: flex;
+    flex-direction: column;
 }
 .form-container{
     width: 500px;
 }
 .main-blog,.main-form{
     font-size: 40px;
+}
+.main-blog{
+    padding-left: 5px;
+    padding-bottom: 30px;
 }
 p{
     font-family: 'Kanit';
@@ -265,4 +281,61 @@ h3 a{
 .profile-container p{
     font-weight: 400;
     font-size: 20px;
+}
+span{
+    width: 400px;
+    display: flex;
+}
+.login-container form{
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.row{
+    display: flex;
+    gap: 30px;
+}
+.seacrh-container{
+    background-color: #4A4A4A;
+    width: 300px;
+    height: 400px;
+    margin-top: 95px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.search-box{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 40px;
+    padding-bottom: 20px;
+}
+.seacrh-container input{
+    width: 200px;
+    background-color: white;
+    color: black;
+    font-family: 'Kanit';
+    font-weight: 400;
+    border: 0px solid transparent;
+    border-radius: 2px;
+}
+.mode-container{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+.mode-container p{
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
+.mode-container p:hover{
+    color: blue;
+}
+i{
+    cursor: pointer;
 }
