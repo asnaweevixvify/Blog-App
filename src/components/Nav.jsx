@@ -11,7 +11,9 @@ function Nav(props){
     useEffect(() => {
         const unsubscribe =  onAuthStateChanged(auth, (user) => {
           if (user) {
-            setEmailName(user.email.split('@')[0])
+            const name = user.email.split('@')[0];
+            const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
+            setEmailName(capitalizedName);
           } else {
             setEmailName('')
           }

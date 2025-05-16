@@ -10,7 +10,7 @@ function Form(props){
     const [inputStatus,setInputStatus] = useState(false)
     const [name,setName] = useState('')
     const navigate = useNavigate();
-
+    const [mode,setMode] = useState('')
 
     const [des,setDes] = useState('')
     useEffect(()=>{
@@ -30,6 +30,15 @@ function Form(props){
                 <input type='text' className='text' value={text} onInput={textInput}></input>
                 <p>เพิ่มคำบรรยาย</p>
                 <textarea className='des' value={des} onInput={desInput}></textarea>
+                <p>หมวดหมู่</p>
+                <select onChange={selectMode}>
+                    <option hidden>เลือกหมวดหมู่</option>
+                    <option>อาหาร</option>
+                    <option>ท่องเที่ยว</option>
+                    <option>การศึกษา</option>
+                    <option>วัฒนธรรม</option>
+                    <option>ข่าวสาร</option>
+                </select>
                 <p>ชื่อผู้เขียน</p>
                 <input type='text' className='text'value={name} onInput={nameInput}></input>
                 <button type='submit' disabled={inputStatus}>เพิ่ม Blog</button>
@@ -47,6 +56,9 @@ function Form(props){
     function nameInput(e){
         setName(e.target.value)
     }
+    function selectMode(e){
+        setMode(e.target.value);
+    }
     function sendInfo(e){
         const user = auth.currentUser
         e.preventDefault()
@@ -54,6 +66,7 @@ function Form(props){
             text:text,
             des:des,
             name:name,
+            mode:mode,
             time:new Date().toLocaleString(),
             uid:user.uid
         }
@@ -61,6 +74,7 @@ function Form(props){
         setText('')
         setDes('')
         setName('')
+        setMode('')
         Swal.fire({
             title: `<h2>เพิ่ม Blog สำเร็จ</h2>`,
             icon: "success",

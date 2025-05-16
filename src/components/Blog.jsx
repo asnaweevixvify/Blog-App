@@ -24,6 +24,7 @@ function Blog(props){
                                     </h4>
                                     <div className="icon">
                                         <h3 onClick={()=>sendIndex(index)}><Link to="/des">อ่านเพิ่มเติม</Link></h3>
+                                        <h3>{e.mode}</h3>
                                         <h3>ผู้เขียน {e.name}</h3>
                                         <h3>{e.time}</h3>
                                         {user && user.uid === e.uid && <Link to='/edit'><i className="fa-solid fa-pen fa-xs" onClick={()=>editItem(e,e.id)}></i></Link>}
@@ -41,7 +42,7 @@ function Blog(props){
     function delItem(id){
         props.getDelItem(id)
         Swal.fire({
-            title: "ลบรายการสำเร็จ",
+            title: `<h2>ลบรายการสำเร็จ</h2>`,
             icon: "success",
             draggable: true
           }).then(()=>{

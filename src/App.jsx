@@ -66,6 +66,7 @@ function App() {
       text:data.text,
       des:data.des,
       name:data.name,
+      mode:data.mode,
       time:data.time,
       uid:data.uid
     })
