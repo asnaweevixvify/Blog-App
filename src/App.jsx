@@ -15,14 +15,18 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Profile from './components/Profile'
-
+import ModeCom from './components/ModeCom'
+import Desmode from './components/Desmode'
+import Result from './components/Result'
 
 
 function App() {
   const navigate = useNavigate();
   const [status, setStatus] = useState(false);
+  const [showSide,setShowSide] = useState(false)
 
   useEffect(() => {
+    setShowSide(true)
     const unsubscribe =  onAuthStateChanged(auth, (user) => {
       if (user) {
         setStatus(true);
@@ -46,6 +50,18 @@ function App() {
       navigate('/');
     }
 },[location])
+
+  useEffect(()=>{
+      if(location.pathname === '/login'){
+        setShowSide(false)
+      }
+      else if(location.pathname === '/regis'){
+        setShowSide(false)
+      }
+      else{
+        setShowSide(true)
+      }
+  },[location])
 
   const [dataList,setDataList] = useState([])
   useEffect(()=>{
@@ -101,10 +117,19 @@ function App() {
     })
     setDatashow(datashow)
   }
+  const [mode,setMode] = useState('')
+  function checkMode(e){
+      setMode(e);
+  }
+  const [result,setResult] = useState('')
+  function getResult(e){
+      setResult(e)
+  }
   
   return (
     <>
       <Nav status={status}/>
+      <div className="container">
         <Routes>
           <Route path='/login' element={<Login />}></Route>
           <Route path='/'element={
@@ -120,7 +145,11 @@ function App() {
           <Route path='/des' element={<Des dataShow={dataShow}/>}></Route>
           <Route path='/regis' element={<Register/>}></Route>
           <Route path='/profile' element={<Profile sendData={dataList} getDelItem={getDelItem} getEditData={getEditData} getIdTopic={getIdTopic}/>}></Route>
+          <Route path='/desmode' element={<Desmode sendData={dataList} getDelItem={getDelItem} getEditData={getEditData} getIdTopic={getIdTopic} mode={mode}/>}></Route>
+          <Route path='/result' element={<Result result={result} sendData={dataList} getDelItem={getDelItem} getEditData={getEditData} getIdTopic={getIdTopic}/>}></Route>
         </Routes>
+        {showSide && <ModeCom getResult={getResult} checkMode={checkMode}/>}
+      </div>
     </>
   )
 }

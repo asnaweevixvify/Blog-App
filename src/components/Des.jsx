@@ -4,7 +4,7 @@ import { useState } from 'react'
 function Des(props){
     const showData = props.dataShow[0]
     return(
-        <>
+        <div className='desAll'>
         <div className="des-container">
                 <h2 className='des-topic'>{showData.text}</h2>
                 <h4 className='des-des' style={{ whiteSpace: 'pre-line' }}>
@@ -15,7 +15,7 @@ function Des(props){
             <p>ผู้เขียน</p>
             <h4 className='des-name'>{showData.name}</h4>
         </div>
-        </>
+        </div>
     )
 }
 

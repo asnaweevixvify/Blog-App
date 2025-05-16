@@ -36,7 +36,6 @@ function Form(props){
                     <option>อาหาร</option>
                     <option>ท่องเที่ยว</option>
                     <option>การศึกษา</option>
-                    <option>วัฒนธรรม</option>
                     <option>ข่าวสาร</option>
                 </select>
                 <p>ชื่อผู้เขียน</p>
