@@ -41,6 +41,12 @@ function App() {
       }
   },[location])
 
+  useEffect(()=>{
+    if(status === true && location.pathname === '/regis'){
+      navigate('/');
+    }
+},[location])
+
   const [dataList,setDataList] = useState([])
   useEffect(()=>{
     async function getList(db){
@@ -112,7 +118,7 @@ function App() {
           </Route>
           <Route path='/des' element={<Des dataShow={dataShow}/>}></Route>
           <Route path='/regis' element={<Register/>}></Route>
-          <Route path='/profile' element={<Profile sendData={dataList} getDelItem={getDelItem} getEditData={getEditData}/>}></Route>
+          <Route path='/profile' element={<Profile sendData={dataList} getDelItem={getDelItem} getEditData={getEditData} getIdTopic={getIdTopic}/>}></Route>
         </Routes>
     </>
   )
