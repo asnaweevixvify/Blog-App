@@ -298,8 +298,8 @@ span{
 .seacrh-container{
     background-color: #4A4A4A;
     width: 300px;
-    height: 400px;
-    margin-top: 128px;
+    height: 500px;
+    margin-top: 130px;
     border: 1px solid transparent;
     border-radius: 5px;
     display: flex;
@@ -326,10 +326,12 @@ span{
     margin-top: 30px;
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 240px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .mode-container p{
-    text-align: center;
+    text-align: left;
     color: white;
     font-size: 20px;
 }
@@ -341,7 +343,7 @@ i{
 }
 .container{
     display: flex;
-    gap: 15px;
+    gap: 35px;
     justify-content: center;
     align-items: flex-start;
 }
@@ -350,4 +352,25 @@ i{
     font-weight: 500;
     font-size: 50px;
     margin-bottom: -10px;
+}
+.search-main{
+    margin-top: 20px;
+    margin-bottom: -20px;
+    text-align: left;
+    width: 240px;
+}
+.logo img{
+    width: 30px;
+    height: 30px;
+}
+.logo{
+    width: 240px;
+    display: flex;
+    margin-top: 30px;
+    gap: 5px;
+}
+.copy{
+    font-size: 15px;
+    width: 240px;
+    margin-top: 30px;
 }
