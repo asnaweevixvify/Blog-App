@@ -5,6 +5,7 @@ function Des(props){
     const showData = props.dataShow[0]
     return(
         <div className='desAll'>
+        <h1 className='main-des'>Description</h1>
         <div className="des-container">
                 <h2 className='des-topic'>{showData.text}</h2>
                 <h4 className='des-des' style={{ whiteSpace: 'pre-line' }}>
