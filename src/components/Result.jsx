@@ -1,5 +1,5 @@
 import './App.css'
-import { useState } from 'react'
+import {useEffect, useState } from 'react'
 import { BrowserRouter as Router,Route,Link,Routes } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import { auth } from './firebase'
@@ -9,9 +9,21 @@ function Result(props){
     const user = auth.currentUser
     const [index,setIndex] = useState('')
     const result = props.result
+    const [not,setNot] = useState(true)
+
+    useEffect(()=>{
+        const newItem = dataList.filter((e)=>{
+            return e.text.toLowerCase().includes(result)
+        })
+        if(newItem.length === 0){
+            setNot(false)
+        }
+    },[])
+    
     return(
         <div className="blog-container">
             <h1 className='main-blog'>Result</h1>
+            {!not && <h1 className='main-not'>Not found</h1>}
             <div className="blog-list-container">
                 <ul>
                     {dataList.map((e,index)=>{
